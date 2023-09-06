@@ -1,0 +1,42 @@
+name: ci
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: setup node LTS
+        uses: actions/setup-node@v3
+        with:
+          node-version: lts/*
+
+      - name: install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
+
+      - name: lint
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: lint
+
+      - name: test
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: test
+          
+      - name: release
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN || secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
