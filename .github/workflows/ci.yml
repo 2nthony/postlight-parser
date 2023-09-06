@@ -36,7 +36,7 @@ jobs:
       #     cmd: test
           
       - name: release
-        run: npx semantic-release
+        run: npx semantic-release --branches main
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN || secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
