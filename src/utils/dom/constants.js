@@ -21,10 +21,6 @@ export const STRIP_OUTPUT_TAGS = [
   'noscript',
   'link',
   'style',
-  'hr',
-  'embed',
-  'iframe',
-  'object',
 ];
 
 // cleanAttributes
