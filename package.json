@@ -52,7 +52,8 @@
     "test:build:web": "node ./scripts/proxy-browser-test.js",
     "test:build:esm": "node ./scripts/proxy-browser-test.js",
     "watch:test": "jest --watch",
-    "generate-parser": "node ./dist/generate-custom-parser.js"
+    "generate-parser": "node ./dist/generate-custom-parser.js",
+    "prepublishOnly": "yarn build"
   },
   "engines": {
     "node": ">=10"
