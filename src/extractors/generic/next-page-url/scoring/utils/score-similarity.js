@@ -1,4 +1,4 @@
-import difflib from 'difflib';
+import difflib from '../../../../../modules/difflib';
 
 export default function scoreSimilarity(score, articleUrl, href) {
   // Do this last and only if we have a real candidate, because it's

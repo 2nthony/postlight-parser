@@ -120,9 +120,7 @@
   "dependencies": {
     "@babel/runtime-corejs2": "^7.2.0",
     "@postlight/ci-failed-test-reporter": "^1.0",
-    "browser-request": "github:postlight/browser-request#feat-add-headers-to-response",
     "cheerio": "^0.22.0",
-    "difflib": "github:postlight/difflib.js",
     "ellipsize": "0.1.0",
     "iconv-lite": "0.5.0",
     "jquery": "^3.5.0",
@@ -138,16 +136,14 @@
   },
   "bundleDependencies": [
     "jquery",
-    "moment-timezone",
-    "browser-request"
+    "moment-timezone"
   ],
   "browser": {
     "cheerio": "./src/shims/cheerio-query",
     "iconv-lite": "./src/shims/iconv-lite",
     "jquery": "./node_modules/jquery/dist/jquery.min.js",
     "main": "./dist/mercury.web.js",
-    "moment-timezone": "./node_modules/moment-timezone/builds/moment-timezone-with-data-2012-2022.min.js",
-    "postman-request": "browser-request"
+    "moment-timezone": "./node_modules/moment-timezone/builds/moment-timezone-with-data-2012-2022.min.js"
   },
   "husky": {
     "hooks": {
