@@ -1,4 +1,4 @@
-import { brsToPs, convertNodeTo } from 'utils/dom';
+import { convertNodeTo } from 'utils/dom';
 
 import { DIV_TO_P_BLOCK_TAGS } from './constants';
 
@@ -40,7 +40,7 @@ function convertSpans($) {
 //   (By-reference mutation, though. Returned just for convenience.)
 
 export default function convertToParagraphs($) {
-  $ = brsToPs($);
+  // $ = brsToPs($);
   $ = convertDivs($);
   $ = convertSpans($);
 
