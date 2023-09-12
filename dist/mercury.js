@@ -421,10 +421,6 @@ var NEGATIVE_SCORE_RE = new RegExp(NEGATIVE_SCORE_HINTS.join('|'), 'i'); // XPat
 var IS_WP_SELECTOR = 'meta[name=generator][value^=WordPress]'; // Match a digit. Pretty clear.
 
 var PAGE_RE = new RegExp('pag(e|ing|inat)', 'i'); // Match any link text/classname/id that looks like it could mean the next
-// http://bit.ly/qneNIT
-
-var BLOCK_LEVEL_TAGS = ['article', 'aside', 'blockquote', 'body', 'br', 'button', 'canvas', 'caption', 'col', 'colgroup', 'dd', 'div', 'dl', 'dt', 'embed', 'fieldset', 'figcaption', 'figure', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'hgroup', 'hr', 'li', 'map', 'object', 'ol', 'output', 'p', 'pre', 'progress', 'section', 'table', 'tbody', 'textarea', 'tfoot', 'th', 'thead', 'tr', 'ul', 'video'];
-var BLOCK_LEVEL_TAGS_RE = new RegExp("^(".concat(BLOCK_LEVEL_TAGS.join('|'), ")$"), 'i'); // The removal is implemented as a blacklist and whitelist, this test finds
 // blacklisted elements that aren't whitelisted. We do this all in one
 // expression-both because it's only one pass, and because this skips the
 // serialization for whitelisted nodes.
@@ -459,64 +455,6 @@ function stripUnlikelyCandidates($) {
       $node.remove();
     }
   });
-  return $;
-}
-
-// Another good candidate for refactoring/optimizing.
-// Very imperative code, I don't love it. - AP
-//  Given cheerio object, convert consecutive <br /> tags into
-//  <p /> tags instead.
-//
-//  :param $: A cheerio object
-
-function brsToPs$$1($) {
-  var collapsing = false;
-  $('br').each(function (index, element) {
-    var $element = $(element);
-    var nextElement = $element.next().get(0);
-
-    if (nextElement && nextElement.tagName.toLowerCase() === 'br') {
-      collapsing = true;
-      $element.remove();
-    } else if (collapsing) {
-      collapsing = false;
-      paragraphize(element, $, true);
-    }
-  });
-  return $;
-}
-
-// make sure it conforms to the constraints of a P tag (I.E. does
-// not contain any other block tags.)
-//
-// If the node is a <br />, it treats the following inline siblings
-// as if they were its children.
-//
-// :param node: The node to paragraphize; this is a raw node
-// :param $: The cheerio object to handle dom manipulation
-// :param br: Whether or not the passed node is a br
-
-function paragraphize(node, $) {
-  var br = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-  var $node = $(node);
-
-  if (br) {
-    var sibling = node.nextSibling;
-    var p = $('<p></p>'); // while the next node is text or not a block level element
-    // append it to a new p node
-
-    while (sibling && !(sibling.tagName && BLOCK_LEVEL_TAGS_RE.test(sibling.tagName))) {
-      var _sibling = sibling,
-          nextSibling = _sibling.nextSibling;
-      $(sibling).appendTo(p);
-      sibling = nextSibling;
-    }
-
-    $node.replaceWith(p);
-    $node.remove();
-    return $;
-  }
-
   return $;
 }
 
@@ -556,7 +494,7 @@ function convertSpans($) {
 
 
 function convertToParagraphs$$1($) {
-  $ = brsToPs$$1($);
+  // $ = brsToPs($);
   $ = convertDivs($);
   $ = convertSpans($);
   return $;
