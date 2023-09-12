@@ -35,7 +35,9 @@ var _Array$isArray = _interopDefault(require('@babel/runtime-corejs2/core-js/arr
 
 var NORMALIZE_RE = /\s{2,}(?![^<>]*<\/(pre|code|textarea)>)/g;
 function normalizeSpaces(text) {
-  return text.replace(NORMALIZE_RE, ' ').trim();
+  return text; // eslint-disable-next-line no-unreachable
+
+  return text.replace(NORMALIZE_RE, ' ');
 }
 
 // Given a node type to search for, and a list of regular expressions,
