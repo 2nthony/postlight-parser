@@ -14,6 +14,7 @@ test-output.json
 .tool-versions
 .yarnrc.yml
 **/.DS_Store
+dist
 
 # yarn
 .pnp.*
