@@ -83,7 +83,7 @@ export const UNLIKELY_CANDIDATES_BLACKLIST = [
   'aux',
   'blogger-labels',
   'combx',
-  'comment',
+  // 'comment', // Note: code block uses it!
   'conversation',
   'disqus',
   'entry-unrelated',
